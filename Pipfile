@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "*"
+django-extensions = "*"
+
+[packages]
+requests = "*"
+beautifulsoup4 = "*"
+django = "*"
+django-split-settings = "*"
+django-environ = "*"
+psycopg2-binary = "*"
+django-jet = "*"
+django-bootstrap4 = "*"
+
+[requires]
+python_version = "3.7"
