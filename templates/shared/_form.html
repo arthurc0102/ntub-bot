@@ -1,29 +1,39 @@
 {% load bootstrap4 %}
 
-<form action="{{ action }}" method="{{ method | default:'POST' }}"
-      class="form" onsubmit="doSubmit();"
-      {% if file %}enctype="multipart/form-data"{% endif %}>
+<div id="form-part">
+  <form action="{{ action }}" method="{{ method | default:'POST' }}"
+        class="form" onsubmit="doSubmit();"
+        {% if file %}enctype="multipart/form-data"{% endif %}>
 
-  {% if method != 'GET' %}
-    {% csrf_token %}
-  {% endif %}
+    {% if method != 'GET' %}
+      {% csrf_token %}
+    {% endif %}
 
-  {% bootstrap_form form %}
+    {% bootstrap_form form %}
 
-  {% buttons %}
-    <button type="submit" class="btn btn-outline-info float-right form-button">
-      送出
+    {% buttons %}
+      <button type="submit" class="btn btn-outline-info float-right form-button">
+        送出
+      </button>
+    {% endbuttons %}
+
+    <button type="button" class="btn btn-outline-secondary float-right form-button mr-2" onclick="history.back();">
+      取消
     </button>
-  {% endbuttons %}
+  </form>
+</div>
 
-  <button type="button" class="btn btn-outline-secondary float-right form-button mr-2" onclick="history.back();">
-    取消
-  </button>
-</form>
-
+<div id="progress-part" hidden=true>
+  <p class="text-center text-warning">處理中請稍候</p>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+  </div>
+</div>
 
 <script>
   function doSubmit() {
     $('.form-button').prop('disabled', true)
+    $('#form-part').prop('hidden', true)
+    $('#progress-part').prop('hidden', false)
   }
 </script>
