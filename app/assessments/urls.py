@@ -21,4 +21,6 @@ from . import views
 app_name = 'assessments'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('fill/', views.fill_all, name='fill_all'),
+    path('fill/<str:class_no>/', views.fill, name='fill'),
 ]

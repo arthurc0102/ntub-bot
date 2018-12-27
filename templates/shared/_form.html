@@ -1,6 +1,9 @@
 {% load bootstrap4 %}
 
-<form action="{{ action }}" method="{{ method | default:'POST' }}" class="form" {% if file %}enctype="multipart/form-data"{% endif %}>
+<form action="{{ action }}" method="{{ method | default:'POST' }}"
+      class="form" onsubmit="doSubmit();"
+      {% if file %}enctype="multipart/form-data"{% endif %}>
+
   {% if method != 'GET' %}
     {% csrf_token %}
   {% endif %}
@@ -8,8 +11,19 @@
   {% bootstrap_form form %}
 
   {% buttons %}
-    <button type="submit" class="btn btn-info float-right">
+    <button type="submit" class="btn btn-outline-info float-right form-button">
       送出
     </button>
   {% endbuttons %}
+
+  <button type="button" class="btn btn-outline-secondary float-right form-button mr-2" onclick="history.back();">
+    取消
+  </button>
 </form>
+
+
+<script>
+  function doSubmit() {
+    $('.form-button').prop('disabled', true)
+  }
+</script>

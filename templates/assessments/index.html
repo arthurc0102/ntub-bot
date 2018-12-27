@@ -3,8 +3,39 @@
 {% block main %}
   <div class="row">
     <div class="col">
+      <a href="{% url 'assessments:fill_all' %}" class="btn btn-warning float-right">填寫全部</a>
       <h1>教學評量列表</h1>
       <hr>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">課程編號</th>
+              <th scope="col">開課班級</th>
+              <th scope="col">課程名稱</th>
+              <th scope="col">老師名稱</th>
+              <th scope="col" class="text-center">動作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for assessment in assessments %}
+              <tr>
+                <th scope="row">{{ assessment.class_no }}</td>
+                <td>{{ assessment.open_class }}</th>
+                <td>{{ assessment.class_name }}</td>
+                <td>{{ assessment.teacher }}</td>
+                <td class="text-center">
+                  {% if assessment.params %}
+                    <a href="{% url 'assessments:fill' assessment.class_no %}" class="btn btn-sm btn-outline-primary">填寫</a>
+                  {% else %}
+                    <a href="#" class="btn btn-sm btn-primary disabled">已填寫</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 {% endblock %}

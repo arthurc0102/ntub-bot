@@ -18,6 +18,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'app.assessments',
     'app.common',
 ]
 
