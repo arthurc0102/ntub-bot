@@ -35,6 +35,9 @@ def fill(cookies, assessment, score, suggestions):
 
 def fill_all(cookies, assessments, score, suggestions):
     for assessment in assessments:
+        if assessment['params'] is None:
+            continue
+
         result = fill(cookies, assessment, score, suggestions)
         if not result:
             return False
