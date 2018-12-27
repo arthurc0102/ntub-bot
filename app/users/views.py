@@ -17,7 +17,7 @@ def login(request):
         request.session['cookies'] = form.cleaned_data['cookies']
         request.session['std_id'] = username
         messages.success(request, '嗨，{} 歡迎使用'.format(username))
-        return redirect('root')
+        return redirect('assessments:index')
 
     return render(request, 'users/login.html', {'form': form})
 
