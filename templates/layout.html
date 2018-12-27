@@ -11,6 +11,8 @@
   {% load static %}
   {% load bootstrap4 %}
 
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}" />
+
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   {% block extra_style %}{% endblock %}
 </head>
@@ -18,7 +20,7 @@
 <body>
   {% include 'shared/_navbar.html' %}
 
-  <div class="container mb-3" style="margin-top: 80px;">
+  <div class="container mb-5" style="margin-top: 80px;">
     {% bootstrap_messages %}
     {% block main %}{% endblock %}
   </div>

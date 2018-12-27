@@ -1,18 +1,30 @@
 {% extends 'layout.html' %}
 
+{% load static %}
+
 {% block main %}
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-md-6">
       <div class="jumbotron">
-        <h1 class="display-4">NTUB Bot</h1>
-        <p class="lead">北商大教學評量機器人</p>
+        <h1 class="display-4 text-center">NTUB Bot</h1>
+        <p class="lead text-center">北商大教學評量機器人</p>
         <hr class="my-4">
         <p>
           如果你想好好填寫教學評量這個網站並不適合你<br>
           我只是希望能讓不想發表意見的學生有方便的工具能夠使用，且不喪失選課或是成績查詢等權利<br>
           如果你看完依然想要使用請點<a href="{% url 'assessments:index' %}">這裡</a>開始使用
         </p>
+        <p>如果你有任何疑問或是想法歡迎聯絡我：<a href="mailto:arthurc0102@gmail.com">arthurc0102@gmail.com</a></p>
       </div>
+    </div>
+
+    <div class="col-12 col-md-6 text-center">
+      <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="Logo">
+      <p class="mt-3">
+        這隻是靠北貓<br>
+        他真的很可愛也很靠北<br>
+        如果你還沒看過現在讓你看看
+      </p>
     </div>
   </div>
 {% endblock %}
