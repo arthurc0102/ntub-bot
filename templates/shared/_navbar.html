@@ -9,13 +9,19 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="#">教學評量列表</a>
+        {% if request.session.cookies %}
+          <a class="nav-link" href="{% url 'assessments:index' %}">教學評量列表</a>
+        {% endif %}
       </li>
     </ul>
 
     <ul class="navbar-nav mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="#">登入</a>
+        {% if request.session.cookies %}
+          <a class="nav-link" href="{% url 'users:logout' %}">登出</a>
+        {% else %}
+          <a class="nav-link" href="{% url 'users:login' %}">登入</a>
+        {% endif %}
       </li>
     </ul>
   </div>

@@ -1,0 +1,15 @@
+{% load bootstrap4 %}
+
+<form action="{{ action }}" method="{{ method | default:'POST' }}" class="form" {% if file %}enctype="multipart/form-data"{% endif %}>
+  {% if method != 'GET' %}
+    {% csrf_token %}
+  {% endif %}
+
+  {% bootstrap_form form %}
+
+  {% buttons %}
+    <button type="submit" class="btn btn-info float-right">
+      送出
+    </button>
+  {% endbuttons %}
+</form>
