@@ -3,7 +3,12 @@
 {% block main %}
   <div class="row">
     <div class="col">
-      <a href="{% url 'assessments:fill_all' %}" class="btn btn-warning float-right">填寫全部</a>
+      {% if not done %}
+        <a href="{% url 'assessments:fill_all' %}" class="btn btn-warning float-right">填寫全部</a>
+      {% else %}
+        <a href="#" class="btn btn-warning float-right disabled">已全部完成</a>
+      {% endif %}
+
       <h3>教學評量列表</h3>
       <hr>
       <div class="table-responsive">

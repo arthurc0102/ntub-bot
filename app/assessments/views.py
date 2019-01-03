@@ -16,8 +16,10 @@ def index(request):
         messages.info(request, '目前不是教學評量填寫時間')
         return redirect('root')
 
+    done = all([assessment['params'] is None for assessment in assessments])
     return render(request, 'assessments/index.html', {
         'assessments': assessments,
+        'done': done,
     })
 
 
