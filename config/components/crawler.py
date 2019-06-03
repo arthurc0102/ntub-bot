@@ -1,7 +1,6 @@
 import requests
 
 # Path
-
 HOST = 'http://ntcbadm.ntub.edu.tw'
 LOGIN_PATH = HOST + '/login.aspx'
 INDEX_PATH = HOST + '/Portal/indexSTD.aspx'
