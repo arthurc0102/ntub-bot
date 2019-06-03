@@ -8,6 +8,7 @@ from config.components.crawler import (
     ASSESSMENT_TA_PATH,
     ASSESSMENT_PATH,
     NOT_TIME_MESSAGE,
+    DEFAULT_HEADERS,
 )
 
 from . import helper
@@ -29,7 +30,12 @@ DETAIL_KEYS = [
 
 
 def get_assessments(cookies):
-    res = requests.get(ASSESSMENT_LIST_PATH, cookies=cookies)
+    res = requests.get(
+        ASSESSMENT_LIST_PATH,
+        cookies=cookies,
+        headers=DEFAULT_HEADERS,
+    )
+
     helper.check_response(res)
 
     if NOT_TIME_MESSAGE in res.text:
@@ -56,7 +62,11 @@ def get_assessments(cookies):
 
 
 def fill_assessment(cookies, detail_params, score, suggestions):
-    res = requests.get(ASSESSMENT_LIST_PATH, cookies=cookies)
+    res = requests.get(
+        ASSESSMENT_LIST_PATH,
+        cookies=cookies,
+        headers=DEFAULT_HEADERS,
+    )
     helper.check_response(res)
 
     data = helper.get_data(res.text)
@@ -66,7 +76,12 @@ def fill_assessment(cookies, detail_params, score, suggestions):
     if detail_params[-1] == 3:
         target_path = ASSESSMENT_TA_PATH
 
-    res = requests.post(target_path, data=data, cookies=cookies)
+    res = requests.post(
+        target_path,
+        data=data,
+        cookies=cookies,
+        headers=DEFAULT_HEADERS,
+    )
     helper.check_response(res)
 
     soup = BeautifulSoup(res.text, 'html.parser')
@@ -89,5 +104,10 @@ def fill_assessment(cookies, detail_params, score, suggestions):
     if suggestions:
         data.update({'Hide_Str2': '3<|>{}'.format(suggestions)})
 
-    res = requests.post(target_path, data=data, cookies=cookies)
+    res = requests.post(
+        target_path,
+        data=data,
+        cookies=cookies,
+        headers=DEFAULT_HEADERS,
+    )
     helper.check_response(res)

@@ -14,3 +14,8 @@ LOGIN_ERROR_MESSAGE = '閒置過久或尚未登入系統，請重新登入系統
 
 # Requests config
 requests.adapters.DEFAULT_RETRIES = 5  # 增加重試次數，避免連線失效
+
+# Headers
+DEFAULT_HEADERS = {
+    'Connection': 'close',
+}
