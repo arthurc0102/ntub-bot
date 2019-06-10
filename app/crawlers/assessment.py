@@ -121,8 +121,9 @@ def fill_assessment(cookies, detail_params, score, suggestions):
     data = helper.get_data(res.text)
     data.update({'SaveData': 'Y', 'Hide_Str': ','.join(values)})
 
-    area_value = soup.select('[name=Areas]')[0]['value']
-    if suggestions:
+    areas = soup.select('[name=Areas]')
+    if len(areas) > 0 and suggestions:
+        area_value = areas[0]['value']
         data.update({'Hide_Str2': '{}<|>{}'.format(area_value, suggestions)})
 
     res = requests.post(
