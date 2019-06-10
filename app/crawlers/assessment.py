@@ -72,8 +72,10 @@ def fill_assessment(cookies, detail_params, score, suggestions):
     data = helper.get_data(res.text)
     data.update(dict(zip(DETAIL_KEYS, detail_params)))
 
+    teacher_name = data['Hide_TchName']  # 存老師姓名回答 TA 時用
+
     target_path = ASSESSMENT_PATH
-    if detail_params[-1] == 3:
+    if detail_params[-1] == '3':
         target_path = ASSESSMENT_TA_PATH
 
     res = requests.post(
@@ -88,8 +90,26 @@ def fill_assessment(cookies, detail_params, score, suggestions):
     question_numbers = [no['value'] for no in soup.select('[name=queNo]')]
 
     values = []
-    for i in question_numbers:
+    for loop_count, i in enumerate(question_numbers):
+        if detail_params[-1] == '3':
+            if loop_count == 0:  # 知道有教學助理
+                values.append('{}-1-'.format(i))
+                continue
+
+            if loop_count == 1:  # 處理教學助理姓名問題
+                values.append('{}-1-{}'.format(i, teacher_name))
+                continue
+
         choices = soup.select('[name=Radio{}]'.format(i))
+        if len(choices) == 0:  # 如果單選找不到試試複選的
+            choices = soup.select('[name=chk{}]'.format(i))
+            choices.pop()  # 移除「其他請說明」選項
+            values.extend(['{}-{}-'.format(i, c['value']) for c in choices])
+            continue
+
+        if detail_params[-1] == '3':
+            choices.pop()  # 如果是 TA 的話，移除不適合請說明的選項
+
         if len(choices) < 5:  # 若長度不足 5 重複最後一個元素至長度 5
             last = choices[-1]
             choices.extend([last] * (5 - len(choices)))

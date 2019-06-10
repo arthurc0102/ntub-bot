@@ -31,7 +31,12 @@
                 <td>{{ assessment.teacher }}</td>
                 <td class="text-center">
                   {% if assessment.params %}
-                    <a href="{% url 'assessments:fill' assessment.class_no %}" class="btn btn-sm btn-outline-primary">填寫</a>
+                    <a
+                      href="{% url 'assessments:fill' assessment.class_no %}{% if assessment.params|last == '3' %}?ta{% endif %}"
+                      class="btn btn-sm btn-outline-primary"
+                    >
+                      填寫
+                    </a>
                   {% else %}
                     <a href="#" class="btn btn-sm btn-primary disabled">已填寫</a>
                   {% endif %}

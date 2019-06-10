@@ -25,8 +25,9 @@ def index(request):
 
 @login_required
 def fill(request, class_no):
+    is_ta = 'ta' in request.GET
     cookies = request.session['cookies']
-    assessment = services.get_assessment(cookies, class_no)
+    assessment = services.get_assessment(cookies, class_no, is_ta)
     if not assessment:
         messages.warning(request, '本課程編號不存在')
         return redirect('assessments:index')

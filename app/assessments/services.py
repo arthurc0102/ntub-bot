@@ -9,12 +9,19 @@ from .models import Log
 logger = logging.getLogger(__name__)
 
 
-def get_assessment(cookies, class_no):
-    assessments = list(filter(
-        lambda x: x['class_no'] == class_no,
-        get_assessments(cookies)
-    ))
+def get_assessment(cookies, class_no, is_ta=False):
+    def assessment_filter(assessment):
+        params = assessment['params']
+        if params is None:
+            return False
 
+        is_target = assessment['class_no'] == class_no
+        if is_ta:
+            return is_target and params[-1] == '3'
+
+        return is_target
+
+    assessments = list(filter(assessment_filter, get_assessments(cookies)))
     if not assessments:
         return None
 
