@@ -31,6 +31,5 @@ def login(username, password):
 
 def check_login(cookies):
     res = requests.get(INDEX_PATH, cookies=cookies, headers=DEFAULT_HEADERS)
-    print(res.request.headers)
     helper.check_response(res)
     return LOGIN_ERROR_MESSAGE not in res.text
