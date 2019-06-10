@@ -13,7 +13,7 @@ class FillForm(forms.Form):
     score = forms.ChoiceField(choices=SCORE_CHOICES, label='分數')
     suggestions = forms.CharField(required=False,
                                   widget=forms.Textarea(),
-                                  label='建議事項')
+                                  label='建議事項（選填）')
 
     def clean(self):
         cleaned_data = super().clean()
